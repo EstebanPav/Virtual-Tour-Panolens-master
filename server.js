@@ -13,13 +13,12 @@ app.use(cors());
 app.use(express.json());
 app.use(compression()); // Habilitar compresión para respuestas
 
-// Servir archivos estáticos
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/img', express.static(path.join(__dirname, 'img')));
+// Servir archivos estáticos desde las nuevas ubicaciones
+app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use('/icons', express.static(path.join(__dirname, 'icons')));
+app.use('/img', express.static(path.join(__dirname, 'img')));
 app.use('/videos', express.static(path.join(__dirname, 'videos')));
 app.use('/photos', express.static(path.join(__dirname, 'photos')));
-app.use('/audios', express.static(path.join(__dirname, 'audios')));
 
 // Conexión a MongoDB
 mongoose
@@ -42,7 +41,7 @@ app.get('/api/data', async (req, res) => {
 
 // Servir el archivo HTML principal
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Iniciar el servidor
